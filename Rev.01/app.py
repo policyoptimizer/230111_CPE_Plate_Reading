@@ -43,8 +43,8 @@ def find_similar_circles(image, threshold_value=1):
 def process_image(uploaded_file):
    img = Image.open(uploaded_file)
    img = np.array(img)
-​
-    if len(img.shape) == 3 and img.shape[2] == 3:  # 컬러 이미지인 경우
+
+if len(img.shape) == 3 and img.shape[2] == 3:  # 컬러 이미지인 경우
         img, circles = find_similar_circles(img)
     else:
         st.error("업로드된 이미지는 컬러 이미지여야 합니다.")
