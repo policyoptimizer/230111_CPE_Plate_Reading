@@ -31,11 +31,11 @@ if uploaded_files:
    for uploaded_file in uploaded_files:
        # 이미지 처리
        result_img = process_image(uploaded_file)
-​
-       # 결과 보여주기
+
+      # 결과 보여주기
        st.image(result_img, caption='Processed Image')
-​
-       # 다운로드 링크 제공
+
+      # 다운로드 링크 제공
        buffered = io.BytesIO()
        result_img.save(buffered, format="JPEG")
        st.download_button("다운로드", buffered.getvalue(), file_name="processed_image.jpg")
