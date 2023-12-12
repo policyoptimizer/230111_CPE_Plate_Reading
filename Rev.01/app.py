@@ -16,7 +16,7 @@ def find_similar_circles(image, threshold_value=1):
 
    circles = cv2.HoughCircles(dst, cv2.HOUGH_GRADIENT, dp=1, minDist=400,
                               param1=40, param2=10, minRadius=150, maxRadius=180)
-​
+
    valid_circles = []
    if circles is not None:
        circles = np.round(circles[0, :]).astype(int)
