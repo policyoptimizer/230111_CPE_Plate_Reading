@@ -17,7 +17,7 @@ def process_image(uploaded_file):
    # 이미지 읽기
    img = Image.open(uploaded_file)
    img = np.array(img)
-​
+
    # 여기에 이미지 처리 로직을 추가하세요.
    # 예: img = find_similar_circles(img)
    img = find_similar_circles(img)
