@@ -32,8 +32,8 @@ def find_similar_circles(image, threshold_value=1):
 
            if white_pixels < 100:
                valid_circles.append((x, y, r))
-              
-    return np.array(valid_circles, dtype=np.uint16)
+           
+          return np.array(valid_circles, dtype=np.uint16)
 
 # Streamlit 페이지 설정
 st.title('Image Processing App')
