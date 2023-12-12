@@ -34,7 +34,7 @@ def find_similar_circles(image, threshold_value=1):
                valid_circles.append((x, y, r))
 
                # 원을 이미지에 표시
-               cv2.circle(image, (x, y), r, (0, 255, 0), 2)              
+               cv2.circle(image, (x, y), r, (0, 255, 0), 2)
         return image, np.array(valid_circles, dtype=np.uint16)
     else:
         return image, np.array([], dtype=np.uint16)
