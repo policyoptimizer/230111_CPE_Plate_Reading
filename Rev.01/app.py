@@ -32,28 +32,28 @@ def find_similar_circles(image, threshold_value=1):
 
            if white_pixels < 100:
                valid_circles.append((x, y, r))
-           
+
+               # 원을 이미지에 표시
+               cv2.circle(image, (x, y), r, (0, 255, 0), 2)
+      
        return np.array(valid_circles, dtype=np.uint16)
    else:
        return np.array([], dtype=np.unit16)
 
-from PIL import Image
-​
 def process_image(uploaded_file):
    img = Image.open(uploaded_file)
    img = np.array(img)
 ​
-   # 이미지 처리 로직
-   img = find_similar_circles(img)
-​
-   # 이미지 형식 변환 (BGR to RGB if necessary)
-   if img.shape[2] == 3:  # Color image
-       img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-   
-   try:
+    if len(img.shape) == 3 and img.shape[2] == 3:  # 컬러 이미지인 경우
+        img, circles = find_similar_circles(img)
+    else:
+        st.error("업로드된 이미지는 컬러 이미지여야 합니다.")
+        return None
+
+    try:
        processed_img = Image.fromarray(img)
        return processed_img
-   except Exception as e:
+    except Exception as e:
        st.error(f"이미지 처리 중 오류 발생: {e}")
        return None
 
