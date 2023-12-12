@@ -1,24 +1,23 @@
 import streamlit as st
 import cv2
 import numpy as np
-import os
 from PIL import Image
 import io
 
 def find_similar_circles(image, threshold_value=1):
-   # Convert the image to grayscale
-   gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # Convert the image to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-   # Apply Gaussian blur to reduce noise
-   blurred = cv2.medianBlur(gray, 13)
+    # Apply Gaussian blur to reduce noise
+    blurred = cv2.medianBlur(gray, 13)
 
-   _, dst = cv2.threshold(blurred, threshold_value, 255, cv2.THRESH_TOZERO)
+    _, dst = cv2.threshold(blurred, threshold_value, 255, cv2.THRESH_TOZERO)
 
-   circles = cv2.HoughCircles(dst, cv2.HOUGH_GRADIENT, dp=1, minDist=400,
-                              param1=40, param2=10, minRadius=150, maxRadius=180)
+    circles = cv2.HoughCircles(dst, cv2.HOUGH_GRADIENT, dp=1, minDist=400,
+                               param1=40, param2=10, minRadius=150, maxRadius=180)
 
-   valid_circles = []
-   if circles is not None:
+    valid_circles = []
+    if circles is not None:
         circles = np.round(circles[0, :]).astype(int)
         for (x, y, r) in circles:
             circle_mask = np.zeros_like(image)
@@ -64,10 +63,10 @@ st.write('이 애플리케이션은 보라색 원을 찾아서 표기합니다.'
 uploaded_files = st.file_uploader("이미지를 업로드하세요", accept_multiple_files=True, type=['jpg', 'jpeg'])
 
 if uploaded_files:
-   for uploaded_file in uploaded_files:
-       result_img = process_image(uploaded_file)
+    for uploaded_file in uploaded_files:
+        result_img = process_image(uploaded_file)
        
-       if result_img:
-           st.image(result_img, caption='Processed Image')
-       else:
-           st.write("이미지 처리에 실패했습니다.")
+        if result_img:
+            st.image(result_img, caption='Processed Image')
+        else:
+            st.write("이미지 처리에 실패했습니다.")
