@@ -35,27 +35,28 @@ def find_similar_circles(image, threshold_value=1):
 
                # 원을 이미지에 표시
                cv2.circle(image, (x, y), r, (0, 255, 0), 2)
-      
-       return np.array(valid_circles, dtype=np.uint16)
-   else:
-       return np.array([], dtype=np.unit16)
+              
+        return image, np.array(valid_circles, dtype=np.uint16)
+    else:
+        return image, np.array([], dtype=np.uint16)
+
 
 def process_image(uploaded_file):
-   img = Image.open(uploaded_file)
-   img = np.array(img)
+    img = Image.open(uploaded_file)
+    img = np.array(img)
 
-if len(img.shape) == 3 and img.shape[2] == 3:  # 컬러 이미지인 경우
-        img, circles = find_similar_circles(img)
-   else:
+    if len(img.shape) == 3 and img.shape[2] == 3:  # 컬러 이미지인 경우
+        processed_img, circles = find_similar_circles(img)
+    else:
         st.error("업로드된 이미지는 컬러 이미지여야 합니다.")
         return None
 
-   try:
-       processed_img = Image.fromarray(img)
-       return processed_img
-   except Exception as e:
-       st.error(f"이미지 처리 중 오류 발생: {e}")
-       return None
+    try:
+        processed_img = Image.fromarray(processed_img)
+        return processed_img
+    except Exception as e:
+        st.error(f"이미지 처리 중 오류 발생: {e}")
+        return None
 
 # Streamlit 페이지 설정
 st.title('Image Processing App')
