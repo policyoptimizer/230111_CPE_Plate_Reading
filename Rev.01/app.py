@@ -19,23 +19,23 @@ def find_similar_circles(image, threshold_value=1):
 
    valid_circles = []
    if circles is not None:
-       circles = np.round(circles[0, :]).astype(int)
-       for (x, y, r) in circles:
-           circle_mask = np.zeros_like(image)
-           cv2.circle(circle_mask, (x, y), r, (255, 255, 255), -1)
-           circle_roi = cv2.bitwise_and(image, circle_mask)
+        circles = np.round(circles[0, :]).astype(int)
+        for (x, y, r) in circles:
+            circle_mask = np.zeros_like(image)
+            cv2.circle(circle_mask, (x, y), r, (255, 255, 255), -1)
+            circle_roi = cv2.bitwise_and(image, circle_mask)
           
-           circle_gray = cv2.cvtColor(circle_roi, cv2.COLOR_BGR2GRAY)
-           _, circle_binary = cv2.threshold(circle_gray, 170, 200, cv2.THRESH_TOZERO)
+            circle_gray = cv2.cvtColor(circle_roi, cv2.COLOR_BGR2GRAY)
+            _, circle_binary = cv2.threshold(circle_gray, 170, 200, cv2.THRESH_TOZERO)
 
-           white_pixels = cv2.countNonZero(circle_binary)
+            white_pixels = cv2.countNonZero(circle_binary)
 
-           if white_pixels < 100:
-               valid_circles.append((x, y, r))
+            if white_pixels < 100:
+                valid_circles.append((x, y, r))
 
-               # 원을 이미지에 표시
-               cv2.circle(image, (x, y), r, (0, 255, 0), 2)
-           return image, np.array(valid_circles, dtype=np.uint16)
+                # 원을 이미지에 표시
+                cv2.circle(image, (x, y), r, (0, 255, 0), 2)
+        return image, np.array(valid_circles, dtype=np.uint16)
     else:
         return image, np.array([], dtype=np.uint16)
 
