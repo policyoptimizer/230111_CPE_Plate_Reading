@@ -21,10 +21,10 @@ def process_image(uploaded_file):
    # 여기에 이미지 처리 로직을 추가하세요.
    # 예: img = find_similar_circles(img)
    img = find_similar_circles(img)
-​
+
    # 처리된 이미지를 PIL 이미지로 변환
    processed_img = Image.fromarray(img)
-​
+
    return processed_img
 
 if uploaded_files:
