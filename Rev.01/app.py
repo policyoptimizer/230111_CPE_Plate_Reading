@@ -46,14 +46,14 @@ def process_image(uploaded_file):
 
 if len(img.shape) == 3 and img.shape[2] == 3:  # 컬러 이미지인 경우
         img, circles = find_similar_circles(img)
-    else:
+   else:
         st.error("업로드된 이미지는 컬러 이미지여야 합니다.")
         return None
 
-    try:
+   try:
        processed_img = Image.fromarray(img)
        return processed_img
-    except Exception as e:
+   except Exception as e:
        st.error(f"이미지 처리 중 오류 발생: {e}")
        return None
 
