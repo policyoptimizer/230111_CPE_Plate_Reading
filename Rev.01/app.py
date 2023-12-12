@@ -7,7 +7,7 @@ import io
 
 # Streamlit 페이지 설정
 st.title('Image Processing App')
-st.write('이 애플리케이션은 이미지에서 유사한 원을 찾고 처리합니다.')
+st.write('이 애플리케이션은 보라색 원을 찾아서 표기합니다.')
 
 # 파일 업로드 위젯
 uploaded_files = st.file_uploader("이미지를 업로드하세요", accept_multiple_files=True, type=['jpg', 'jpeg'])
@@ -20,6 +20,7 @@ def process_image(uploaded_file):
 ​
    # 여기에 이미지 처리 로직을 추가하세요.
    # 예: img = find_similar_circles(img)
+   img = find_similar_circles(img)
 ​
    # 처리된 이미지를 PIL 이미지로 변환
    processed_img = Image.fromarray(img)
